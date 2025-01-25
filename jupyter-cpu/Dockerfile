@@ -6,4 +6,6 @@ USER root
 RUN groupadd jovyan \
     && usermod -g jovyan -a -G users jovyan
 
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
 USER jovyan
