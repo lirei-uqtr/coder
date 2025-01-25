@@ -29,8 +29,5 @@ build-cuda-pytorch-notebook:
       --cache=true
   rules:
     - when: manual
-  # tags:
-  #   - uqtr-sti
-
-
-
+  tags:
+    - uqtr-sti
