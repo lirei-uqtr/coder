@@ -1,0 +1,36 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  KUBE_CONTEXT: lirei.open/docker:builder
+
+
+.use_context: &use_context
+  - kubectl config get-contexts 
+  - kubectl config use-context "$KUBE_CONTEXT"
+
+
+
+build-cuda-pytorch-notebook:
+  stage: build
+  variables:
+    KUBE_CONTEXT: lirei.open/docker:builder 
+  image:
+    name: gcr.io/kaniko-project/executor:v1.23.2-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/jupyter"
+      --dockerfile "${CI_PROJECT_DIR}/jupyter/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:pytorch-notebook:cuda12-python-3.11.8"
+      --cache=true
+  rules:
+    - when: manual
+  # tags:
+  #   - uqtr-sti
+
+
+
