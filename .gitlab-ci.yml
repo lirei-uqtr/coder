@@ -31,3 +31,22 @@ build-cuda-pytorch-notebook:
     - when: manual
   tags:
     - uqtr-sti
+
+
+build-notebook-cpu:
+  stage: build
+  variables:
+    KUBE_CONTEXT: lirei.open/docker:builder 
+  image:
+    name: gcr.io/kaniko-project/executor:v1.23.2-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/jupyter"
+      --dockerfile "${CI_PROJECT_DIR}/jupyter/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:scipy-notebook"
+      --cache=true
+  rules:
+    - when: manual
+  tags:
+    - uqtr-sti
