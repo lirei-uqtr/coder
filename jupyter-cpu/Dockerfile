@@ -9,6 +9,8 @@ RUN curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.40/
 RUN dpkg -i quarto-1.6.40-linux-amd64.deb
 RUN apt-get install -f
 RUN rm quarto-1.6.40-linux-amd64.deb
+
+RUN apt-get update -y
 RUN apt-get install lmodern -y
 
 RUN groupadd jovyan \
