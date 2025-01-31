@@ -19,6 +19,7 @@ RUN wget https://github.com/jgm/pandoc/releases/download/3.6.2/pandoc-3.6.2-1-am
 RUN dpkg -i pandoc-3.6.2-1-amd64.deb
 RUN apt-get install -f
 RUN rm pandoc-3.6.2-1-amd64.deb
+run tlmgr init-usertree
 
 RUN groupadd jovyan \
     && usermod -g jovyan -a -G users jovyan
