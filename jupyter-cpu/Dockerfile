@@ -15,7 +15,10 @@ RUN rm quarto-1.6.40-linux-amd64.deb
 RUN apt-get install lmodern -y
 RUN apt-get install texlive-fonts-recommended texlive-fonts-extra -y
 
-RUN apt update && apt upgrade pandoc
+RUN wget https://github.com/jgm/pandoc/releases/download/3.6.2/pandoc-3.6.2-1-amd64.deb
+RUN dpkg -i pandoc-3.6.2-1-amd64.deb
+RUN apt-get install -f
+RUN rm pandoc-3.6.2-1-amd64.deb
 
 RUN groupadd jovyan \
     && usermod -g jovyan -a -G users jovyan
