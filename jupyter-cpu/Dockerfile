@@ -15,6 +15,8 @@ RUN rm quarto-1.6.40-linux-amd64.deb
 RUN apt-get install lmodern -y
 RUN apt-get install texlive-fonts-recommended texlive-fonts-extra -y
 
+RUN apt update && apt upgrade pandoc
+
 RUN groupadd jovyan \
     && usermod -g jovyan -a -G users jovyan
 
