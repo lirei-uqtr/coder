@@ -22,7 +22,7 @@ RUN apt-get install texlive-fonts-recommended texlive-fonts-extra -y
 
 RUN quarto install tinytex 
 run tlmgr init-usertree
-RUN tlmgr update --self --all
+# RUN tlmgr update --self --all
 
 RUN groupadd jovyan \
     && usermod -g jovyan -a -G users jovyan
