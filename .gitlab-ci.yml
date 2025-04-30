@@ -37,6 +37,9 @@ build-notebook-cpu:
   stage: build
   variables:
     KUBE_CONTEXT: lirei.open/docker:builder 
+    RUNNER_SCRIPT_TIMEOUT: 90m
+    RUNNER_AFTER_SCRIPT_TIMEOUT: 90m
+    RUNNER_SCRIPT_TIMEOUT: 90m 
   image:
     name: gcr.io/kaniko-project/executor:v1.23.2-debug
     entrypoint: [""]
