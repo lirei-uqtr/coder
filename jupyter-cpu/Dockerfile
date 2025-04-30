@@ -1,4 +1,4 @@
-FROM quay.io/jupyter/scipy-notebook:latest
+FROM quay.io/jupyter/scipy-notebook:2025-04-30
 
 USER root
 # Generally, Dev Container Features assume that the non-root user (in this case jovyan)
@@ -8,25 +8,20 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 
 
-RUN curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.40/quarto-1.6.40-linux-amd64.deb
-RUN dpkg -i quarto-1.6.40-linux-amd64.deb
+RUN curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.29/quarto-1.7.29-linux-amd64.deb
+RUN dpkg -i quarto-1.7.29-linux-amd64.deb
 RUN apt-get install -f
-RUN rm quarto-1.6.40-linux-amd64.deb
+RUN rm quarto-1.7.29-linux-amd64.deb
 RUN apt-get install lmodern -y
 RUN apt-get install texlive-fonts-recommended texlive-fonts-extra -y
 
-# RUN wget https://github.com/jgm/pandoc/releases/download/3.6.2/pandoc-3.6.2-1-amd64.deb
-# RUN dpkg -i pandoc-3.6.2-1-amd64.deb
-# RUN apt-get install -f
-# RUN rm pandoc-3.6.2-1-amd64.deb
 
 RUN quarto install tinytex 
 run tlmgr init-usertree
-# RUN tlmgr update --self --all
+
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 RUN groupadd jovyan \
     && usermod -g jovyan -a -G users jovyan
-
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 USER jovyan
