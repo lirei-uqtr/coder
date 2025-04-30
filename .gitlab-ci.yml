@@ -44,7 +44,7 @@ build-notebook-cpu:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}/jupyter-cpu"
       --dockerfile "${CI_PROJECT_DIR}/jupyter-cpu/Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}:scipy-notebook"
+      --destination "${CI_REGISTRY_IMAGE}:scipy-notebook-2025-04-30"
       --cache=true
   rules:
     - when: manual
