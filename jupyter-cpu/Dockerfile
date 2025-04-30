@@ -46,6 +46,7 @@ RUN curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.29/
     rm quarto-1.7.29-linux-amd64.deb
 
 # If you **do** want TinyTeX for Quarto’s caching, install it under jovyan:
+RUN chown -R jovyan:users /usr/local/texlive/2025
 USER jovyan
 # comment these two lines out if you’re happy with TeX Live 2025 only
 RUN quarto install tinytex --no-prompt --quiet
