@@ -1,9 +1,16 @@
-FROM quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
+FROM pytorch/pytorch:2.11.0-cuda12.8-cudnn9-runtime
 
 USER root
-# Generally, Dev Container Features assume that the non-root user (in this case jovyan)
-# is in a group with the same name (in this case jovyan). So we must first make that so.
-RUN groupadd jovyan \
-    && usermod -g jovyan -a -G users jovyan
+
+# Install required tools for Coder
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y curl sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Rename ubuntu user to jovyan and change home directory
+RUN usermod -l jovyan -d /home/jovyan -m ubuntu \
+    && groupmod -n jovyan ubuntu \
+    && echo "jovyan ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER jovyan
+WORKDIR /home/jovyan
