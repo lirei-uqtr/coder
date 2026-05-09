@@ -84,7 +84,8 @@ spec:
   runtimeClassName: nvidia
   containers:
   - name: pytorch-test
-    image: pytorch/pytorch:2.2.2-cuda11.8-cudnn8-runtime
+    image: ghcr.io/lirei-uqtr/coder-pytorch:main
+    imagePullPolicy: Always
     command: ["python", "/workspace/fractal_gpu.py"]
     volumeMounts:
     - name: code
