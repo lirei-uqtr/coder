@@ -16,9 +16,9 @@ RUN if id -u ubuntu >/dev/null 2>&1; then \
     && echo "jovyan ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER jovyan
+ENV HOME=/home/jovyan
+WORKDIR /home/jovyan
 
 # Install 'uv' for lightning-fast python package management
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/home/jovyan/.local/bin:/home/jovyan/.cargo/bin:${PATH}"
-
-WORKDIR /home/jovyan
