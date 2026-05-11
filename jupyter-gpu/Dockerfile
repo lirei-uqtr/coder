@@ -13,7 +13,8 @@ RUN if id -u ubuntu >/dev/null 2>&1; then \
     else \
         useradd -m -s /bin/bash -u 1000 jovyan; \
     fi \
-    && echo "jovyan ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    && echo "jovyan ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && chown -R jovyan:users /opt/conda || true
 
 USER jovyan
 ENV HOME=/home/jovyan
